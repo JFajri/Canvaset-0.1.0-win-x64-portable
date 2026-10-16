@@ -1,0 +1,4 @@
+node_modules/
+CanvasetData/
+dist/
+*.log

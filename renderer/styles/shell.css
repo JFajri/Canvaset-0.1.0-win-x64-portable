@@ -1,0 +1,51 @@
+/* Kerangka aplikasi: rail navigasi + area tampilan */
+.app {
+  display: grid; grid-template-columns: var(--rail-w) minmax(0, 1fr); gap: var(--gap);
+  height: 100vh; padding: var(--gap);
+  background:
+    linear-gradient(var(--bg-grid) 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px) 0 0 / 28px 28px,
+    var(--bg);
+}
+.panel {
+  display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden;
+  background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-panel);
+}
+.panel-head { display: flex; align-items: center; gap: var(--s2); padding: var(--s3) var(--s4); min-height: 52px; }
+.panel-head h2 { font-size: var(--fs-lg); font-weight: 650; letter-spacing: -0.01em; }
+
+/* Rail */
+.rail { display: flex; flex-direction: column; align-items: center; gap: var(--s2); padding: var(--s3) 0; background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--r-xl); }
+.rail-brand { width: 36px; height: 36px; margin-bottom: var(--s3); display: grid; place-items: center; }
+.rail-btn {
+  position: relative; width: 42px; height: 42px; display: grid; place-items: center;
+  border: 0; border-radius: 13px; background: transparent; color: var(--text-3);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.rail-btn:hover { background: var(--surface-hover); color: var(--text); }
+.rail-btn.active { background: var(--accent-soft); color: var(--accent); box-shadow: 0 0 0 1px var(--accent-line), 0 0 18px color-mix(in srgb, var(--accent) 22%, transparent); }
+.rail-btn[data-tip]:hover::after {
+  content: attr(data-tip); position: absolute; left: 52px; top: 50%; transform: translateY(-50%); z-index: 700;
+  padding: 5px 10px; white-space: nowrap; font-size: var(--fs-sm); font-weight: 500;
+  background: var(--surface-3); color: var(--text); border: 1px solid var(--border-strong); border-radius: var(--r-sm); box-shadow: var(--shadow-pop); pointer-events: none;
+}
+.rail .grow { flex: 1; }
+
+/* Area tampilan */
+.views { position: relative; min-width: 0; min-height: 0; }
+.view { position: absolute; inset: 0; display: none; gap: var(--gap); min-width: 0; min-height: 0; }
+.view.active { display: flex; }
+.view > .panel { flex: none; }
+.view > .panel.fill { flex: 1; }
+
+/* Palet pencarian global */
+.palette { width: min(640px, 100%); align-self: flex-start; margin-top: 10vh; background: var(--surface-1); border: 1px solid var(--border-strong); border-radius: var(--r-xl); box-shadow: var(--shadow-pop); overflow: hidden; animation: rise var(--dur) var(--ease); }
+.palette input { width: 100%; height: 54px; padding: 0 var(--s5); border: 0; border-bottom: 1px solid var(--border); background: transparent; font-size: var(--fs-lg); user-select: text; }
+.palette-list { max-height: 52vh; overflow: auto; padding: var(--s2); }
+.palette-row { display: flex; align-items: center; gap: var(--s3); width: 100%; padding: var(--s2) var(--s3); border: 0; background: transparent; border-radius: var(--r-md); text-align: left; }
+.palette-row .ic { width: 32px; height: 32px; border-radius: var(--r-sm); background: var(--surface-2); display: grid; place-items: center; color: var(--text-2); flex: none; }
+.palette-row .tx { min-width: 0; flex: 1; }
+.palette-row .tx b { font-weight: 550; display: block; }
+.palette-row .tx span { display: block; color: var(--text-3); font-size: var(--fs-sm); }
+.palette-row.sel, .palette-row:hover { background: var(--surface-sel); }
+.palette-foot { display: flex; gap: var(--s4); padding: var(--s2) var(--s4); border-top: 1px solid var(--border); color: var(--text-3); font-size: var(--fs-xs); }
